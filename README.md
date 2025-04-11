@@ -2,10 +2,10 @@
 
 ---
 ## Funcialidad
-    - Obtiene productos desde un API (Fake Store).
-    - Muestra los productos en tarjetas (card).
-    - Cada tarjeta contiene un botón para mostrar información adicional en un modal.
-    - Muestra un mensaje de error en caso de que falle la API.
+- Obtiene productos desde un API (Fake Store).
+- Muestra los productos en tarjetas (card).
+- Cada tarjeta contiene un botón para mostrar información adicional en un modal.
+- Muestra un mensaje de error en caso de que falle la API.
 
 ---
 ##  ¿Cómo funciona?

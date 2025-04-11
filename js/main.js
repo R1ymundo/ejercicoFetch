@@ -1,13 +1,12 @@
 const URLMain = "https://fakestoreapi.com/products/"
 const main = document.getElementsByTagName("main").item(0);
 const cards = document.getElementById("cards");
+const ulMenu = document.getElementById("ulMenu");
 
-
-function getData() {
+function getData(cat) {
     const options = {"method": "GET"}
-    fetch(URLMain)
+    fetch(URLMain + cat, options)
         .then((response) => {
-            console.log(response);
             response.json().then((res) => {
                 // console.log(res.length);
                 // console.log(res[0].title);
@@ -23,11 +22,36 @@ function getData() {
         });
 }//getData()
 
-getData();
+function getCategories() {
+    const options = {"method": "GET"}
+    fetch(URLMain + "categories/", options)
+        .then((response) => {
+            response.json().then((res) => {
+                // console.log("Categories: ", res);
+                res.forEach((cat) =>{
+                    ulMenu.insertAdjacentHTML("afterbegin",
+                        `<li><a class="dropdown-item" onclick = "getData('category/${cat.replace("'","%27")}')">${cat}</a></li>`
+                    )
+                });
+            });
+        })
+        .catch((err) => {
+            main.insertAdjacentHTML("beforeend",
+                `<div class="alert alert-danger" role="alert">
+                            ${err.message}
+                        </div>`
+            );
+        });
+}//getCategories()
+
+getData("");
+getCategories();
 
 
 function createcards(products) {
     let card = "";
+    cards.innerText = "";
+
     products.forEach(product => {
         card += `<div class="card" style="width: 18rem">
                     <img src="${product.image}" class="card-img-top" alt="${product.title}">
